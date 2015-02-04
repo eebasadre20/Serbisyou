@@ -32,7 +32,9 @@ class Serviceprovider < ActiveRecord::Base
 	validates :password, :confirmation => true
 	validates_length_of :password, :in => 6..20, :on => :create
 
-	#scope :select_by_barangay, -> { joins(:barangay).where('barangays.id = ?', @@brgy_id)}
+
+	scope :get_skillset, -> ( categories ) { joins.(:categories).where(categories: { id: categories } ) }
+	scope :get_serviceprovider_skillset, -> ( skillset ) { joins.(:primary_skillsets).where(primary_skillsets: { id: skillset } ) }
 
 	def encrypt_password
 		#self.encrypted_password = BCrypt::Password.create(password) if password.present?

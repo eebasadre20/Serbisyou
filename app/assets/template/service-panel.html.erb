@@ -3,64 +3,26 @@
   <div class="row">
         <h1>Business & Etc.</h1>
         <hr/>
-        <p>
+        <section id="header">
           Lorem ipsum dolor sit amet, consectetur adipisicing elit. Praesentium, doloremque minima, facilis voluptatem cum blanditiis! Veritatis aliquid minus laudantium laborum perspiciatis dolor nihil delectus exercitationem blanditiis, dignissimos earum debitis enim?
-        </p>
-        <br >
-        <br >
-    <div class="col-md-3" style="border:1px solid #ddd;margin-top:40px">
-      <h5>By Barangay</h5>
-            <ul class="list-group">
-            <li ng-repeat="barangay in barangays" ng-click="setBarangay(barangay.barangay);setBrgy(barangay.id)" class="list-group-item {{setSelected(barangay.id)}}" ng-show="getNumberOfServiceProvider( barangay.id )" >
-              <span class="badge" > {{ getNumberOfServiceProvider( barangay.id ) }} </span>
-              {{barangay.barangay}}
-            </li>
-          </ul>
-            <h5>By Category</h5>
-            <div class="panel panel-default">
-              <div class="panel-body">
-                  <input type="checkbox" ng-model="filterParams.manicurista" ng-true-value="'YES'" ng-false-value="'NO'"> Manicurista 
-                  <input type="checkbox" ng-model="filterParams.labandera" ng-true-value="'YES'" ng-false-value="'NO'"> Labandera 
-                  <br />
-                  <input type="checkbox" ng-model="filterParams.vulca" ng-true-value="'YES'" ng-false-value="'NO'"> Vulca 
-              </div>
-            </div>
-          <hr />
-      <a slide-toggle="#derp" ng-click="filterStat()" >{{stat}} Advance Filter</a>
-      <div id="derp" class="slideable">
-      <hr />
-          <h5>Filter By:</h5>
-          <div class="panel panel-default">
-            <div class="panel-body">
-              Age :
-              <select class="form-control" ng-model="age" ng-change="setAge(age);">
-                <option ng-repeat="age in ages">{{age}}</option>
-              </select>
-              Gender :
-              <select class="form-control" ng-model="gender" ng-change="setGender(gender);">
-                <option ng-repeat="gender in genders">{{gender}}</option>
-              </select>
-              Status :
-              <select class="form-control" ng-model="mstatus" ng-change="setStatus(mstatus);">
-                <option ng-repeat="mstatus in maritalStatus">{{mstatus}}</option>
-              </select>
-            </div>
-          </div>
-          <h5>Or By Clearances</h5>
-          <div class="panel panel-default">
-              <div class="panel-body">
-                  <input type="checkbox" ng-model="filterParams.nbi" ng-true-value="'YES'" ng-false-value="'NO'"> NBI 
-                  <input type="checkbox" ng-model="filterParams.police" ng-true-value="'YES'" ng-false-value="'NO'"> Police 
-                  <br />
-                  <input type="checkbox" ng-model="filterParams.barangay" ng-true-value="'YES'" ng-false-value="'NO'"> Barangay 
-              </div>
-            </div>
-      </div>
-      <hr />
-      <button ng-click="submitFilterQuery()" class="col-md-12 btn">Click to Filter</button>
-      <hr />
-      <p><b>SERBISYOU © </b> | Serving you at our best.</p>
+        </section>
+    <div class="col-md-3">
+      <h5>By Category</h5>
+      <ul class="list-group">
+      <li ng-repeat="barangay in barangays" ng-click="filterByBarangay(barangay.id);setBrgy(barangay.id)" class="list-group-item {{setSelected(barangay.id)}}" ng-show="getNumberOfServiceProvider( barangay.id )">
+        <span class="badge"> {{ getNumberOfServiceProvider( barangay.id ) }} </span>
+        {{barangay.barangay}}
+      </li>
+    </ul>
+      <h5>By Category</h5>
+      <ul class="list-group">
+      <li ng-repeat="category in categories" ng-click="filterByCategory(category.id);setCtgry(category.id)" class="list-group-item {{setSelectedCategory(category.id)}}" ng-show="getNumberOfServiceProviderInCategory( category.id )">
+        <span class="badge"> {{ getNumberOfServiceProviderInCategory( category.id ) }} </span>
+        {{category.name}}
+      </li>
+    </ul>
     </div>
+
     <div class="col-md-9">
       <h4>Workers</h4>
       <div class="row">
@@ -75,7 +37,9 @@
                 <p>Address: <b>{{sp.brgy_address}}</b></p></center>
               </div>
             </div>
-              <div class="view-link">View Details</div>
+            <div class="view-link">
+              <div class="sulod">View Details</div>
+            </div>
           </div>
         </a>
         <script>
@@ -85,6 +49,18 @@
           $(this).find('.view-link').slideUp(300);
         });
         </script>
+        </div>
+        <div class="col-sm-6 col-md-4" ng-repeat="sp in workerinservicebycat" ng-show="showRepeat == false">
+          <div class="thumbnail hvr-grow">
+            <img ng-src="{{ sp.avatar.thumb.url }}">
+            <div class="caption">
+              <h3>{{ sp.firstname }} {{ sp.lastname }}</h3>
+              <p>Birthdate: <b>{{sp.birthdate | date : format : timezone}}</b></p>
+              <p>Address: <b>{{sp.brgy_address}}</b></p>
+              <p><a href="#" ng-click="showServiceProviderPanel(session_user, sp.id)">View details</a></p>
+            </div>
+          </div>
+        </div>
       </div>
     </div>
   </div>

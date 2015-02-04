@@ -31,6 +31,7 @@ Rails.application.routes.draw do
         get 'get_categories'
         get 'get_clearances'
         get 'get_preview'
+        get 'filter_query'
     end
 
     member do

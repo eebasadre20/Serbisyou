@@ -175,6 +175,10 @@ class UsersController < ApplicationController
 
 	end
 
+	def filter_query
+		
+	end
+
 	def get_session_user
 		user = User.find(session[:user_id])
 		respond_to do |format|

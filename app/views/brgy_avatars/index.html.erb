@@ -1,0 +1,10 @@
+<h1>Clearance Gallery</h1>
+
+<div id="clearances">
+  <%= render @brgy_admin %>
+</div>
+
+<%= form_for BrgyAvatar.new do |f| %>
+	<%= f.label :avatar, "Your Profile Photo" %>
+	<%= f.file_field :avatar, multiple: true, name: "brgyavatar[avatar]" %> 
+<% end %>

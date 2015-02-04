@@ -1,0 +1,70 @@
+
+<div class="container content">
+  <div class="row">
+        <h1>Business & Etc.</h1>
+        <hr/>
+        <section id="header">
+          Lorem ipsum dolor sit amet, consectetur adipisicing elit. Praesentium, doloremque minima, facilis voluptatem cum blanditiis! Veritatis aliquid minus laudantium laborum perspiciatis dolor nihil delectus exercitationem blanditiis, dignissimos earum debitis enim?
+        </section>
+    <div class="col-md-3">
+      <h5>By Category</h5>
+      <ul class="list-group">
+      <li ng-repeat="barangay in barangays" ng-click="filterByBarangay(barangay.id);setBrgy(barangay.id)" class="list-group-item {{setSelected(barangay.id)}}" ng-show="getNumberOfServiceProvider( barangay.id )">
+        <span class="badge"> {{ getNumberOfServiceProvider( barangay.id ) }} </span>
+        {{barangay.barangay}}
+      </li>
+    </ul>
+      <h5>By Category</h5>
+      <ul class="list-group">
+      <li ng-repeat="category in categories" ng-click="filterByCategory(category.id);setCtgry(category.id)" class="list-group-item {{setSelectedCategory(category.id)}}" ng-show="getNumberOfServiceProviderInCategory( category.id )">
+        <span class="badge"> {{ getNumberOfServiceProviderInCategory( category.id ) }} </span>
+        {{category.name}}
+      </li>
+    </ul>
+    </div>
+
+    <div class="col-md-9">
+      <h4>Workers</h4>
+      <div class="row">
+        <div class="col-sm-6 col-md-4" ng-repeat="sp in workerinservice" ng-show="showRepeat == true">
+          <a href="#" class="view-link-to" ng-click="showServiceProviderPanel(session_user, sp.id)">
+          <div class="view-body">
+             <div class="view-content">
+              <div><img ng-src="{{ sp.avatar.thumb.url }}"></div>
+              <div class="caption">
+                <center><h3>{{ sp.firstname }} {{ sp.lastname }}</h3>
+                <p>Birthdate: <b>{{sp.birthdate | date : format : timezone}}</b></p>
+                <p>Address: <b>{{sp.brgy_address}}</b></p></center>
+              </div>
+            </div>
+            <div class="view-link">
+              <div class="sulod">View Details</div>
+            </div>
+          </div>
+        </a>
+        <script>
+        $('.view-body').hover(function(){
+          $(this).find('.view-link').slideDown(300);
+        },function(){
+          $(this).find('.view-link').slideUp(300);
+        });
+        </script>
+        </div>
+        <div class="col-sm-6 col-md-4" ng-repeat="sp in workerinservicebycat" ng-show="showRepeat == false">
+          <div class="thumbnail hvr-grow">
+            <img ng-src="{{ sp.avatar.thumb.url }}">
+            <div class="caption">
+              <h3>{{ sp.firstname }} {{ sp.lastname }}</h3>
+              <p>Birthdate: <b>{{sp.birthdate | date : format : timezone}}</b></p>
+              <p>Address: <b>{{sp.brgy_address}}</b></p>
+              <p><a href="#" ng-click="showServiceProviderPanel(session_user, sp.id)">View details</a></p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+

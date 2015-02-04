@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html ng-app="serbisyou">
+<head>
+  
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>SerbisyouV1</title>
+  <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
+  <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
+  <%= csrf_meta_tags %>
+</head>
+<body>
+<!-- <nav class="navbar-default navbar-fixed-top" role="navigation">
+  <div class="container-fluid">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+        <span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a class="navbar-brand" href=""><%#= image_tag 'logo_serbisyou.png', class: 'nav-logo' %></a>
+    </div>
+
+    <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+        <ul class="nav navbar-nav">
+          <li><a class="nav-link" href="">Home</a></li>
+                  <li><a class="nav-link" href="">FAQs</a></li>
+                  <li><a class="nav-link" href="">About Us</a></li>
+                  <li><a class="nav-link" href="contact_us.html">Contact Us</a></li>
+        </ul>
+        
+        <form class="navbar-form navbar-right" >
+          <%# if current_user %>
+            <a href="" class="nav-login">Welcome, <%#= current_user.firstname %>!</a>
+            <%#= link_to 'Logout', {:controller=> "serviceproviders", :action=> "destroy"}, :method => :delete, class: 'nav-signup' %>
+          <% #else %>
+            <%#= link_to 'Login', login_serviceproviders_path, class: 'nav-signup' %>
+          <%# end %>
+        </form>
+      </div>
+
+  </div>
+</nav> -->
+<%#= link_to 'Logout', {:controller=> "serviceproviders", :action=> "destroy"}, :method => :delete, class: 'nav-signup' %>
+
+<%= render 'navigation' %>
+<%= yield %>
+
+</body>
+</html>

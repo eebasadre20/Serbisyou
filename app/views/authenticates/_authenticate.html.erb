@@ -1,0 +1,38 @@
+<%= form_for @authenticate do |f| %>
+	<% if @authenticate.errors.any? %>
+		<ul>
+			<% @authenticate.errors.full_messages.each do |message| %>
+				<li><%= message %></li>
+			<% end %>
+		</ul>
+	<% end %>
+
+	 <div class="form-group">
+            <label class="client-login-label">Username</label>
+           <%= f.text_field :username %>
+     </div>
+     <div class="form-group">
+            <label class="client-login-label">Email</label>
+           <%= f.text_field :email %>
+      </div>
+
+     <div class="form-group">
+            <label class="client-login-label">Password</label>
+           <%= f.password_field :password %>
+     </div>
+
+     <div class="form-group">
+            <label class="client-login-label">Password Confirmation</label>
+           <%= f.password_field :password_confirmation %>
+     </div>
+
+     <div class="form-group">
+            <label class="client-login-label">Role</label>
+            <%= f.select :role, %w{ Admin Service-Provider Customer }, :include_blank => false %>
+    </div>
+
+    <div class="form-group">
+        <%= f.submit("Register", class: 'btn btn-lg btn-success client-signin-btn') %>
+      </div>
+
+<% end %>

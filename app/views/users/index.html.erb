@@ -1,0 +1,53 @@
+<section ng-controller='listServiceCtrl'>
+      <div class="row homeRow" ng-show="indexServicePanel == true">
+        <div class="col-lg-5 col-md-6 col-lg-offset-1 col-md-offset-1">
+          <div class="banner">
+            <div class="description-back">
+             <p class="banner-first-description">Do you have any</p>
+              <p class="banner-first-description-bold">household problems?</p>
+              <a href="" class="banner-description">Get your services now!</a>
+            </div>
+          </div>
+        </div>
+        <div class="col-lg-5 col-md-4 col-sm-11">
+              <p class="category-browse">Browse the categories:</p>        
+              <div class="row categoryRow">
+                <ul>
+                    <li class="homeCategory" ng-repeat="service in servicelist">
+                        <a class="category" href="#" ng-click="setServiceId(service)">
+                            <span class="categoryIcon {{service.service_keyword}}"></span>
+                            <p>{{service.service}}</p>
+                        </a>
+                    </li>
+                </ul>                       
+              </div>
+        </div>
+    </div>
+
+    <div class="container" service-panel>
+
+    </div>
+
+        
+      <div class="social-media">
+               <h3>Connect with us!</h3>
+              <div class="social-media">
+          <a href="http://www.facebook.com/serbisyou">
+            <img src="assets/facebook-logo.png" class="social-media-img">
+          </a>
+          <a href="http://www.facebook.com/serbisyou">
+            <img src="assets/twitter-logo.png" class="social-media-img">
+          </a>
+            </div>
+      </div>
+
+         <footer class="footer">
+          <ul class="details">
+            <li><a href="">Terms and Conditions</a></li>
+            <li><a href="">Privacy Policy</a></li>
+            <li><a href="">Contact Us</a></li>
+            <li><a href="">About Serbisyou</a></li>
+          </ul>
+          <p class="details">Copyright of Serbisyou 2014 &copy;</p>            
+          </footer>    
+</section>

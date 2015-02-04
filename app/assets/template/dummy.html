@@ -1,0 +1,463 @@
+app.controller('listServiceCtrl',[
+	'$rootScope',
+	'$scope', 
+	'$http', 
+	'listServiceFactory',
+	function controller($rootScope,$scope,$http,listServiceFactory) {
+		$scope.session_user;
+		$scope.service_name;
+		$scope.workerinservice;
+
+		 $scope.filterByBarangay = function ( id , serviceProvider ) {
+				var filteredServiceProvider = [];
+				filteredServiceProvider = serviceProvider.filter( 
+					function ( eachServiceProvider ) {
+						if ( eachServiceProvider.barangay_id == id )
+							return eachServiceProvider;
+					}
+				 );
+				return filteredServiceProvider;
+			};
+
+		$scope.filterByCategory = function (id, serviceProvider ) {
+			var filteredServiceProvider = [];
+			filteredServiceProvider = serviceProvider.filter(
+				function ( eachServiceProvider ) {
+					if ( eachServiceProvider.category_id == id)
+						return eachServiceProvider;
+				}
+			);
+			return filteredServiceProvider;
+		}
+
+/*-------------------------------------------------------------------------------------------------------*/	
+
+
+		$scope.sessionUser = function () {
+			$http.get(listServiceFactory.url + '/users/get_session_user')
+			.success(function onSuccess(response) {
+				$scope.session_user = response;
+				$scope.setService($scope.session_user);
+				console.log(response);
+				
+			});
+		}
+
+		$scope.setService = function (user) {
+			$http.get('/users/' + service.id + '/services')
+			.success( function onSuccess(response) {
+				$scope.serviceProviderInService(response.id);
+				$scope.getCategories(response.id);
+			});
+		}
+
+		$scope.serviceProviderInService = function serviceProviderInService(id) {
+			$http.get(listServiceFactory.url + '/users/get_worker_in_service/' + id)
+			.success(function onSuccess(response) {
+				$scope.workerinservice = response;
+				$scope.barangayWorker = $scope.workerinservice;
+				//$rootScope.$broadcast( "service-selected" , id , response );
+			});
+		}
+
+		$scope.barangayList = function barangayList() {
+			$http.get(listServiceFactory.url + '/users/get_barangay')
+			.success(function onSuccess(response) {	
+			    //console.log(response);			
+				$scope.barangays = response;
+				$scope.barangays.unshift(
+					{
+						"barangay": "All",
+						"id": "*"
+					}
+				);
+			});
+		}
+
+		$scope.getCategories = function getCategories(id) {
+			$http.post(listServiceFactory.url + '/users/get_categories/' + id)
+			.success(function onSuccess(response) {
+				$scope.categories = response;
+			});
+		}
+
+
+		$scope.setBrgy = function (id) { 
+			$scope.activeId = id;
+		}
+
+		$scope.setCtgry = function (id) { 
+			$scope.ctgryActiveId = id;
+		}
+
+		$scope.setSelected = function setSelected(id) {
+			var filtered = $scope.barangayWorker || [];
+			if ( id == $scope.activeId ) return "active"; 
+			else return "not-active";
+		}
+
+		$scope.setSelectedCategory = function setSelectedCategory(id) {
+			var filtered = $scope.barangayWorker || [];
+			if ( id == $scope.ctgryActiveId ) return "active"; 
+			else return "not-active";
+		}
+
+		$scope.getNumberOfServiceProvider = function ( id ) {	
+			var filtered = $scope.barangayWorker || [];
+			if ( id == "*" )
+				return filtered.length;
+			else {
+				return filtered.filter( function ( each ) {
+					if ( each.barangay_id == id ) return each;
+				} ).length;
+			}
+		};
+
+		$scope.getNumberOfServiceProviderInCategory = function ( id ) {	
+			var filtered = $scope.barangayWorker || [];
+			if ( id == "*" )
+				return filtered.length;
+			else {
+				return filtered.filter( function ( each ) {
+					if ( each.category_id == id ) return each;
+				} ).length;
+			}
+		};
+
+		/*$scope.setService( {
+						"id": 1,
+						"service": "unknown"
+					} );*/
+
+		$scope.filterByBarangay = function ( id ) {
+						if ( id == "*" ) $scope.workerinservice = $scope.barangayWorker;
+						else $scope.workerinservice = $scope.filterByBarangay( id , $scope.barangayWorker );
+					};
+
+		$scope.filterByCategory = function ( id ) {
+			$scope.workerinservice = $scope.filterByCategory( id, $scope.barangayWorker );
+		}
+
+
+
+		/*
+
+		$scope.setBrgy = function (id) { 
+			$scope.activeId = id;
+		}
+
+		$scope.setCtgry = function (id) { 
+			$scope.ctgryActiveId = id;
+		}
+
+		$scope.setSelected = function setSelected(id) {
+			var filtered = $scope.barangayWorker || [];
+			if ( id == $scope.activeId ) return "active"; 
+			else return "not-active";
+		}
+
+		$scope.setSelectedCategory = function setSelectedCategory(id) {
+			var filtered = $scope.barangayWorker || [];
+			if ( id == $scope.ctgryActiveId ) return "active"; 
+			else return "not-active";
+		}
+
+		$scope.getNumberOfServiceProvider = function ( id ) {	
+			var filtered = $scope.barangayWorker || [];
+			if ( id == "*" )
+				return filtered.length;
+			else {
+				return filtered.filter( function ( each ) {
+					if ( each.barangay_id == id ) return each;
+				} ).length;
+			}
+		};
+
+		$scope.getNumberOfServiceProviderInCategory = function ( id ) {	
+			var filtered = $scope.barangayWorker || [];
+			if ( id == "*" )
+				return filtered.length;
+			else {
+				return filtered.filter( function ( each ) {
+					if ( each.category_id == id ) return each;
+				} ).length;
+			}
+		};
+
+
+		var filterByBarangay = function ( id , serviceProvider ) {
+				var filteredServiceProvider = [];
+				filteredServiceProvider = serviceProvider.filter( 
+					function ( eachServiceProvider ) {
+						if ( eachServiceProvider.barangay_id == id )
+							return eachServiceProvider;
+					}
+				 );
+				return filteredServiceProvider;
+			};
+
+		var filterByCategory = function (id, serviceProvider ) {
+			var filteredServiceProvider = [];
+			filteredServiceProvider = serviceProvider.filter(
+				function ( eachServiceProvider ) {
+					if ( eachServiceProvider.category_id == id)
+						return eachServiceProvider;
+				}
+			);
+			return filteredServiceProvider;
+		}
+
+		$scope.setService( {
+						"id": loc[loc.length - 2],
+						"service": "unknown"
+					} ); 
+
+
+		$scope.filterByBarangay = function ( id ) {
+						if ( id == "*" ) scope.workerinservice = scope.barangayWorker;
+						else scope.workerinservice = filterByBarangay( id , scope.barangayWorker );
+					};
+
+		$scope.filterByCategory = function ( id ) {
+			scope.workerinservice = filterByCategory( id, scope.barangayWorker );
+		}*/
+
+		/*$scope.setServiceId = function (service) {
+		    console.log($scope.workerinservice);
+		    console.log($scope.barangays);			
+			$scope.serviceProviderInService(service.id);
+			$scope.getCategories(service.id);
+			//$scope.service_name = service.service;
+			/*$scope.service_id = service.id;
+			$scope.serviceprovider_panel = true;
+		}	
+
+		$scope.getServiceProvider = function getServiceProvider(brgy,service_id) {
+			console.log($scope.workerinservice);
+		}
+
+		$scope.getCategories = function getCategories(id) {
+			$http.post(listServiceFactory.url + '/users/get_categories/' + id)
+			.success(function onSuccess(response) {
+				$scope.categories = response;
+				console.log("****************");
+				console.log($scope.categories);
+			});
+		}
+
+		$scope.setBrgy = function (id) { 
+			$scope.activeId = id;
+		}
+
+		$scope.setCtgry = function (id) { 
+			$scope.ctgryActiveId = id;
+		}
+
+		$scope.setSelected = function setSelected(id) {
+			var filtered = $scope.barangayWorker || [];
+			if ( id == $scope.activeId ) return "active"; 
+			else return "not-active";
+		}
+
+		$scope.setSelectedCategory = function setSelectedCategory(id) {
+			var filtered = $scope.barangayWorker || [];
+			if ( id == $scope.ctgryActiveId ) return "active"; 
+			else return "not-active";
+		}
+
+		$scope.getNumberOfServiceProvider = function ( id ) {	
+			var filtered = $scope.barangayWorker || [];
+			if ( id == "*" )
+				return filtered.length;
+			else {
+				return filtered.filter( function ( each ) {
+					if ( each.barangay_id == id ) return each;
+				} ).length;
+			}
+		};
+
+		$scope.getNumberOfServiceProviderInCategory = function ( id ) {	
+			var filtered = $scope.barangayWorker || [];
+			if ( id == "*" )
+				return filtered.length;
+			else {
+				return filtered.filter( function ( each ) {
+					if ( each.category_id == id ) return each;
+				} ).length;
+			}
+		};
+
+
+		$scope.getServiceList = function getServiceList(service) {
+			$http.get(listServiceFactory.url + '/users/get_servicelist')
+			.success(function onSuccess(response) {
+				$scope.servicelist = response;
+			});
+		}
+
+	    $scope.getSkillCategories = function getSkillCategories(skill) {
+	    	$http.get(listServiceFactory.url + '/users/get_categorylist/' + skill.id)
+			.success(function onSuccess(response) {
+				$scope.categorylist = response;
+			});
+	    }
+*/
+ 		$scope.sessionUser();
+ 		
+		$scope.barangayList();
+		//$scope.getServiceList();
+			
+	}
+]);
+
+app
+	.controller( "commentController" , [
+		"$scope",
+		"$http",
+		"$location",
+		function controller ( $scope , $http, $location ) {
+			$scope.commentSubmit = function ( ) {
+				var userId = $location.absUrl().split( "/" );
+				userId = userId[userId.length - 1];				
+				$http.post( "/users/" + $scope.sessionUser.id + "/comments" , {"commentor": $scope.sessionUser.firstname, "comment": $scope.commentContent, "sp": userId} )
+				.success( function ( response ) {
+					$scope.commentContent = '';
+					$http.post("/users/" + $scope.sessionUser.id + "/comments/all", { "sp" : userId })
+					.success( function ( response ) {
+						$scope.comments = response;
+					} );
+				} );
+			};
+
+			$scope.getComment = function () {
+				var userId = $location.absUrl().split( "/" );
+				userId = userId[userId.length - 1];	
+				$http.post("/users/" + $scope.sessionUser.id + "/comments/all", { "sp" : userId })
+				.success( function ( response ) {
+					$scope.comments = response;
+				} );
+			}
+
+		}
+	] );
+
+app
+	.controller( "voteController",[
+		'$scope',
+		'$http',
+		'$location',
+		function controller( $scope, $http, $location) {
+
+			$scope.voteIt = function ( ) {
+				var userId = $location.absUrl().split( "/" );
+				userId = userId[userId.length - 1];
+				$http.post( "/users/" + $scope.sessionUser.id + "/vote" , {"sp": userId, "current_user" : $scope.sessionUser} )
+				.success( function ( response ) {
+					
+				} );
+			};	
+		}
+    ]);
+
+/*app
+	.directive( "servicePanel" , [
+		"$location",
+		function directive ( $location ) {
+			var filterByBarangay = function ( id , serviceProvider ) {
+				var filteredServiceProvider = [];
+				filteredServiceProvider = serviceProvider.filter( 
+					function ( eachServiceProvider ) {
+						if ( eachServiceProvider.barangay_id == id )
+							return eachServiceProvider;
+					}
+				 );
+				return filteredServiceProvider;
+			};
+
+			var filterByCategory = function (id, serviceProvider ) {
+				var filteredServiceProvider = [];
+				filteredServiceProvider = serviceProvider.filter(
+					function ( eachServiceProvider ) {
+						if ( eachServiceProvider.category_id == id)
+							return eachServiceProvider;
+					}
+				);
+				return filteredServiceProvider;
+			}
+
+			return {
+				"restrict": "A",
+				"scope": true,
+				"controller" : "listServiceCtrl",
+				"templateUrl": "/assets/service-panel.html.erb",
+				"link": function onLink ( scope , element , attributeSet ) {
+					//element.addClass( "hidden" );
+					
+					var loc = $location.absUrl().split( "/" );
+
+					scope.setService( {
+						"id": loc[loc.length - 2],
+						"service": "unknown"
+					} ); 
+					//scope.setServiceId( loc[loc.length - 2] );
+
+					scope.$on( "service-selected" , 
+						function ( evt , id , data ) {
+							element.removeClass( "hidden" );	
+						} );
+
+					scope.filterByBarangay = function ( id ) {
+						if ( id == "*" ) scope.workerinservice = scope.barangayWorker;
+						else scope.workerinservice = filterByBarangay( id , scope.barangayWorker );
+					};
+
+					scope.filterByCategory = function ( id ) {
+						scope.workerinservice = filterByCategory( id, scope.barangayWorker );
+					}
+
+				}
+			}			
+		}
+	] );*/
+
+app
+	.directive( "commentBox" , [
+		"$http",
+		"listServiceFactory",
+		function directive ( $http , listServiceFactory ) {
+			return {
+				"restrict": "A",
+				"scope": true,
+				"controller": "commentController",
+				"link": function onLink ( scope , element , attributeSet ) {
+					$http.get(listServiceFactory.url + '/users/get_session_user')
+					.success(function onSuccess(response) {
+						scope.sessionUser = response;
+						scope.predicate = '-id';
+						scope.getComment();						
+					});
+
+				}
+			}
+		}
+	] );
+
+app
+	.directive( "voteBox" , [
+		'$http',
+		'listServiceFactory',
+		function directive( $http, listServiceFactory ) {
+			return {
+				'restrict' : 'A',
+				'scope'	: true,
+				'controller': 'voteController',
+				'templateUrl' : "/assets/vote-panel.html",
+				'link': function onLink( scope, element, attributeSet ) {
+					$http.get(listServiceFactory.url + '/users/get_session_user')
+					.success(function onSuccess(response) {
+						scope.sessionUser = response;					
+					});
+				}
+			}
+		}
+	]);

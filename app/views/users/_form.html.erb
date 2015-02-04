@@ -1,0 +1,49 @@
+<%= form_for(@user, html: { :multipart => true }, class: 'form-horizontal') do |f| %> 
+      <!--
+      <div class="form-group">
+            <label for="exampleInputFile">Photo</label>
+            <%= f.file_field :avatar %>
+      </div>
+-->
+      <div class="form-group">
+            <label class="client-login-label">Firstname</label>
+            <%= f.text_field :firstname,class: 'form-control client-login-field', placeholder: 'Firstname' %>
+      </div>
+      <div class="form-group">
+            <label class="client-login-label">Lastname</label>
+            <%= f.text_field :lastname,class: 'form-control client-login-field', placeholder: 'Lastname' %>
+      </div>
+
+      <div class="form-group">
+            <label class="client-login-label">Email</label>
+            <%= f.email_field :email, class: 'form-control client-login-field', placeholder: 'Email' %>
+      </div>
+
+      <div class="form-group">
+            <label class="client-login-label">Password</label>
+            <%= f.password_field :password, class: 'form-control client-login-field', placeholder: 'Password' %>
+      </div>
+
+      <div class="form-group">
+            <label class="client-login-label">Password Confirmation</label>
+            <%= f.password_field :password_confirmation,  class: 'form-control client-login-field',placeholder: 'Password Confirmation' %>
+      </div>
+
+      <div class="form-group">
+            <label class="client-login-label">Barangay</label>
+            <%= f.text_field :barangay, class: 'form-control client-login-field', placeholder: 'Barangay' %>
+      </div>
+
+      <div class="form-group">
+            <label class="client-login-label">Barangay Address</label>
+            <%= f.text_field :brgy_address, class: 'form-control client-login-field', placeholder: 'Blk. lot no., Street' %>
+      </div>
+
+      <div class="form-group">
+            <label class="client-login-label">Contact Number</label>
+            <%= f.text_field :contact_number, class: 'form-control client-login-field', placeholder: 'Contact Number' %>
+      </div>
+      <div class="form-group">
+        <%= f.submit("Register", class: 'btn btn-lg btn-success client-signin-btn') %>
+      </div>
+    <% end %>

@@ -1,0 +1,110 @@
+<div class="container" ng-controller="PreviewCtrl">
+	<div class="row">
+		<div class="col-md-6">
+			<div class="col-md-12">
+				<center> <%#= image_tag @serviceprovider.avatar_url(:thumb).to_s, class: "img-circle profile-img img-responsive" %>
+				<h1>{{ serviceProviderDetails.personal.firstname }} {{ serviceProviderDetails.personal.lastname }}<%#= @serviceprovider.firstname %> <%#= @serviceprovider.lastname %></h1></center>
+
+			</div>
+			<div class="col-md-6">
+				<h4>Skills</h4>
+				<hr />
+				<div class="row profile-works">
+				  <div class="col-xs-6 col-md-3" ng-repeat="skill in  serviceProviderDetails.skillset">
+				   		{{ skill.name }}
+				  </div>
+				</div>
+			</div>
+
+			<div class="col-md-6">
+				<h4>Clearances</h4>
+				<hr />
+				<div class="row profile-works">
+				  <div class="col-xs-6 col-md-3" ng-repeat="clearance in  serviceProviderDetails.clearances">
+				   		{{ clearance.name }}
+				  </div>
+				</div>
+			</div>
+
+<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog" message>
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <h4 class="modal-title" id="exampleModalLabel">New message</h4>
+      </div>
+      <div class="modal-body">
+        <form>
+          <div class="form-group">
+            <label for="recipient-name" class="control-label">Recipient:</label>
+            <input type="text" class="form-control" ng-model="message.recipient" id="recipient-name" disabled/>
+          </div>
+          <div class="form-group">
+            <label for="recipient-name" class="control-label">From:</label>
+            <input type="text" class="form-control" ng-model="message.from" id="recipient-name" disabled/>
+          </div>
+          <div class="form-group">
+            <label for="message-text" class="control-label">Message:</label>
+            <textarea class="form-control" ng-model="message.messageText" id="message-text"></textarea>
+          </div>
+        </form>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-primary" ng-click="sendMessage( )">Send message</button>
+      </div>
+    </div>
+  </div>
+</div>
+		</div>
+		<div class="col-md-6">
+			<a href="#" class="btn btn-warning" data-toggle="modal" data-target="#exampleModal" ng-click="setMessage( serviceProviderDetails.personal.firstname, serviceProviderDetails.personal.lastname, serviceProviderDetails.personal.contact_number )">Message <span class="glyphicon glyphicon-envelope" aria-hidden="true"></span></a><hr/>
+			<div class="panel panel-warning">
+		      <div class="panel-heading">
+		        <h3 class="panel-title">Information</h3>
+		      </div>
+		      <div class="panel-body">
+		        Lorem ipsum dolor sit amet, consectetur adipisicing elit. Vel architecto perspiciatis aliquid perferendis recusandae ipsum iste iure eum, necessitatibus ipsa repudiandae atque et sit aperiam doloribus, fuga itaque odio obcaecati! Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quod unde ut aspernatur expedita dolores quasi consequuntur quibusdam error consectetur incidunt, cupiditate cumque aperiam. Maiores velit, minus dolorum eos alias nobis. Lorem ipsum dolor sit amet, consectetur adipisicing elit. Doloribus esse cumque mollitia quae labore optio maiores veritatis ut ex consequatur doloremque reprehenderit quo repellat deserunt accusamus, rerum accusantium illum et!
+		      </div>
+		    </div>
+		    <div class="panel panel-default">
+			  <div class="panel-body">
+			   	Lorem ipsum dolor sit amet, consectetur adipisicing elit. Molestiae nihil laborum aliquam, adipisci minus. Dolor, doloribus, perspiciatis. Quisquam vero voluptates optio aperiam repellat, sit deserunt, nemo ipsa modi fugit, eos.<br/>
+			  </div>
+			</div>
+		</div>
+		<input id="input-id" type="number" class="rating" min=1 max=10 step=2 data-size="sm" data-rtl="true">
+	</div>
+	<br/>
+	<br/>
+	<h4>Comments</h4>
+	<hr/>
+	<div class="row" comment-box>
+		<div class="col-md-6">
+			<!-- <div vote-box></div> -->
+
+			<% if session[:user_id] %>
+			<div><form ng-submit="commentSubmit( )">
+				<div class="form-group">				
+					<textarea name="comment" class="form-control" rows="3" ng-model="commentContent"></textarea>
+				</div>
+				<div class="form-group">
+					<button type="submit" class="btn btn-primary pull-right">Comment</button>
+				</div>
+			</form></div>
+			<% end %>
+
+			<div class="comment-body"dir-paginate="comment in comments| itemsPerPage: 5 | orderBy:predicate:reverse">
+				<div class="comment-list">
+					<p class="comment-user">{{comment.commentor}}</p>
+					<p class="comment-content"> - {{comment.content}}</p>
+					<p class="comment-date pull-right">{{comment.created_at | date:'medium'}}<p>
+					<hr/>
+				</div>
+			</div>
+
+			<dir-pagination-controls boundary-links="true" on-page-change="pageChangeHandler(newPageNumber)" template-url="/assets/dirPagination.tpl.html"></dir-pagination-controls>
+
+		</div>
+	</div>
+</div>

@@ -1,0 +1,202 @@
+<%#= render 'serviceproviders/new' %>
+
+
+    <div class="row" ng-controller="RegisterServiceProviderCtrl">
+        <div class="col-xs-12">
+            <div class="row">
+                <section class="col-lg-10 col-lg-offset-1 col-md-10 col-md-offset-1 col-xs-12 col-sm-offset-0">
+                    <div class="well well-lg">
+                        <div class="row">
+                            <form ng-submit="registerProvider()" novalidate> 
+                            <div class="col-sm-6 col-xs-12">
+                            <label>Name</label>
+                                <div class="row">
+                                    <div class="col-xs-12 col-sm-6 col-md-6">
+                                      <div class="form-group">
+                                          <input type="text" name="firstname" placeholder="Firstname" class='form-control input-md'ng-model="sp.serviceprovider.firstname">
+                                      </div>
+                                    </div>
+                                    <div class="col-xs-12 col-sm-6 col-md-6">
+                                      <div class="form-group">
+                                          <input type="text" name="lastname" placeholder="Lastname" class='form-control input-md'ng-model="sp.serviceprovider.lastname">
+                                      </div>
+                                    </div>
+                                </div>
+                                <label>Username</label>
+                                <div class="row">
+                                    <div class="col-xs-12 col-sm-12 col-md-12">
+                                      <div class="form-group">
+                                           <input type="text" name="username" placeholder="Username" class='form-control input-md'ng-model="sp.serviceprovider.username">
+                                      </div>
+                                    </div>
+                                </div> 
+                              <label>Email</label>
+                                <div class="row">
+                                    <div class="col-xs-12 col-sm-12 col-md-12">
+                                      <div class="form-group">
+                                         <input type="email" name="email" placeholder="Email" class='form-control input-md'ng-model="sp.serviceprovider.email">
+                                      </div>
+                                    </div>
+                                </div> 
+                              <label>Password</label>  
+                                <div class="row">
+                                    <div class="col-xs-12 col-sm-12 col-md-12">
+                                      <div class="form-group"> 
+                                          <input type="password" name="password" placeholder="Password" class='form-control input-md'ng-model="sp.serviceprovider.password">
+                                      </div>
+                                    </div>
+                                </div> 
+                              <label>Password Confirmation</label> 
+                                <div class="row">
+                                    <div class="col-xs-12">
+                                      <div class="form-group">  
+                                          <input type="password" name="password_confirmation" placeholder="Password" class='form-control input-md'ng-model="sp.serviceprovider.password_confirmation">
+                                      </div>
+                                    </div>
+                                </div>   
+                                <!-- <label>Birth Date</label>
+                                <div class="row">
+                                    <div class="col-xs-12">
+                                          <div class="input-append date" id="dp3" data-date="12-02-2012" data-date-format="dd-mm-yyyy">
+                                            <input class="span2" size="16" type="text" value="12-02-2012">
+                                            <span class="add-on"><i class="icon-th"></i></span>
+                                          </div>
+                                          <input id="meeting" type="date" value="2011-01-13"/>
+                                          <input type="date" step="7" min="2014-09-08">
+                                      </div>
+                                    </div> -->
+                                      <label>Gender</label>
+                                      <div class="row">
+                                        <div class="col-md-12">
+                                          <div class="form-group">
+                                                <select ng-model="sp.serviceprovider.gender" ng-options="gender for gender in genders">
+                                                	<option value="">Choose Gender</option>
+                                                </select>
+                                          </div>
+                                        </div>
+                                      </div>
+                                      <label>Civil Status</label>
+                                      <div class="row">
+                                        <div class="col-md-12">
+                                          <div class="form-group">
+                                                <select ng-model="sp.serviceprovider.civil_status" ng-options="stat for stat in status">
+                                                	<option value="">Choose Status</option>
+                                                </select>
+                                          </div>
+                                        </div>
+                                      </div>
+                              
+                                      <label>Barangay</label>
+                                      <div class="row">
+                                      <div class="col-xs-12">
+                                        <div class="form-group">
+                                          <div class="btn-group">
+                                            <%#= collection_select(:serviceprovider, :barangay_id, Barangay.order(:barangay)  , :id, :barangay, prompt: 'Choose Barangay') %>
+                                            <select 
+                                                ng-change="selectAction()"
+                          										ng-model="sp.serviceprovider.barangay"
+                          										ng-options="value.barangay as value.barangay for value in barangayList">
+                          										<option>--</option>
+                          									</select>
+                                          </div>
+                                        </div>
+                                      </div>
+                                    </div>
+                              
+                              <label for="cellnumber">Barangay Address</label>
+                                <div class="row">
+                                    <div class="col-xs-12">
+                                        <div class="form-group">  
+                                          <%#= f.text_field :brgy_address, class: 'form-control input-md', placeholder: 'Blk. lot no., Street' %>
+                                          <input type="text" name="brgy_address" placeholder="Username" class='form-control input-md'ng-model="sp.serviceprovider.brgy_address">
+                                        </div>
+                                    </div>
+                                </div>
+
+                              
+
+                          </div>
+                            <div class="col-sm-6 col-xs-12">
+                                <div class="row">
+                                    <div class="col-xs-12">
+
+                                    </div>
+                                </div>
+
+                                <label>Services</label>
+                                <div class="row">
+                                    <div class="col-xs-12">
+                                       <div class="form-group">
+                                          <%#= f.collection_select(:service_id, Service.all, :id, :service, prompt: 'Choose Service') %>
+                                          <select 
+                                                ng-change="selectAction()"
+                                              ng-model="sp.serviceprovider.service_id"
+                                              ng-options="value.id as value.service for value in serviceList">
+                                              <option>--</option>
+                                            </select>  
+                                        </div>
+                                      </div>
+                                    </div>
+                                    <label>Category</label>
+                                      <div class="row" ng-show="category_panel">
+                                          <div class="col-xs-12">
+                                             <div class="form-group">
+                                                <%#= f.grouped_collection_select(:category_id, Service.all, :categories, :service, :id, :name, prompt: 'Choose Category') %>
+                                                <label ng-repeat="category in categoryList">
+                                                  <input type="checkbox" checklist-model="sp.categories" checklist-value="category.id"> {{category.name}}
+                                                </label>
+                                              </div>
+                                          </div>
+                                      </div>
+                                      <br>
+                                      <label>Clearances</label>
+                                      <div class="row" >
+                                          <div class="col-xs-12">
+                                             <div class="form-group">
+                                                <%#= f.grouped_collection_select(:category_id, Service.all, :categories, :service, :id, :name, prompt: 'Choose Category') %>
+                                                <label ng-repeat="clearance in clearanceList">
+                                                  <input type="checkbox" checklist-model="sp.clearances" checklist-value="clearance.id"> {{clearance.name}}
+                                                </label>
+                                              </div>
+                                          </div>
+                                      </div>
+                                    <br>
+                                    <label>Contact Number</label>
+                                      <div class="row">
+                                          <div class="col-xs-12">
+                                             <div class="form-group">                                 
+                                                <%#= f.text_field :contact_number, class: 'form-control input-md', placeholder: 'Contact Number' %>
+                                                <input type="text" name="contact_number" placeholder="Username" class='form-control input-md' ng-model="sp.serviceprovider.contact_number">
+                                              </div>
+                                          </div>
+                                      </div>
+                                    
+                                    <center><label>Profile Picture</label></center>
+                                    <div class="row">
+                                      <div class="col-xs-12">
+                                        <center><div class="fileinput fileinput-new" data-provides="fileinput">
+                                          <div class="fileinput-preview thumbnail" data-trigger="fileinput" style="width: 200px; height: 150px;"></div>
+                                          <div>
+                                            <span class="btn btn-primary btn-file"><span class="fileinput-new">Select image</span><span class="fileinput-exists">Change</span><input type="file" nv-file-select="" uploader="uploader"/><%#= f.file_field :avatar %></span>
+                                            <a href="#" class="btn btn-danger fileinput-exists" data-dismiss="fileinput">Remove</a>
+                                          </div>
+                                        </div></center>
+                                    </div><!-- end of column -->
+                                </div><!-- end of row -->
+                          </br></br></br><hr/>
+                              <div class="form-group">
+                                <input type="submit" value="Register" class="btn btn-lg btn-success col-xs-12"> 
+                                <%#= f.submit("Register", class: 'btn btn-lg btn-success col-xs-12') %>
+                              </div>
+                            </div><!-- end of column 2 -->
+                        </div><!-- end of well row -->
+                        </form>
+                    </div><!-- end of well -->
+                </section>
+            </div><!-- end of row -->
+        </div>
+    </div> 
+
+    <script>
+    	$('#dp3').datepicker();
+    </script>

@@ -1,0 +1,89 @@
+<%= form_for @clearance do |f| %>
+	<div class="row">
+    <%= f.hidden_field :serviceprovider_id %>
+
+<h4>Clearances</h4> 
+    <div class="row">
+      <div class="col-md-4">
+          <center><h3>NBI Clearance</h3></center>
+          <center><div class="fileinput fileinput-new" data-provides="fileinput">
+            <div class="fileinput-preview thumbnail" data-trigger="fileinput" style="width: 200px; height: 150px;"></div>
+            <div>
+              <span class="btn btn-primary btn-file"><span class="fileinput-new" id="load-image">Select image</span><span class="fileinput-exists">Change</span><%= f.file_field :avatar_nbi %></span>
+              <a href="#" class="btn btn-danger fileinput-exists" data-dismiss="fileinput">Remove</a>
+            </div>
+          </div></center>
+      </div>
+
+      <div class="col-md-4">
+        <center><h3>Police Clearance<h3></center>
+          <center><div class="fileinput fileinput-new" data-provides="fileinput">
+            <div class="fileinput-preview thumbnail" data-trigger="fileinput" style="width: 200px; height: 150px;"></div>
+            <div>
+              <span class="btn btn-primary btn-file"><span class="fileinput-new" id="load-image">Select image</span><span class="fileinput-exists">Change</span><%= f.file_field :avatar_police %></span>
+              <a href="#" class="btn btn-danger fileinput-exists" data-dismiss="fileinput">Remove</a>
+            </div>
+          </div></center>
+      </div>
+
+      <div class="col-md-4">
+        <center><h3>Barangay Clearance</h3></center>
+          <center><div class="fileinput fileinput-new" data-provides="fileinput">
+            <div class="fileinput-preview thumbnail" data-trigger="fileinput" style="width: 200px; height: 150px;"></div>
+            <div>
+              <span class="btn btn-primary btn-file"><span class="fileinput-new" id="load-image">Select image</span><span class="fileinput-exists">Change</span><%= f.file_field :avatar_barangay %></span>
+              <a href="#" class="btn btn-danger fileinput-exists" data-dismiss="fileinput">Remove</a>
+            </div>
+          </div></center>
+      </div>
+    </div>
+
+<h4>Past Works and Certificates</h4> 
+    <div class="row">
+      <div class="col-md-3">
+          <center><div class="fileinput fileinput-new" data-provides="fileinput">
+            <div class="fileinput-preview thumbnail" data-trigger="fileinput" style="width: 200px; height: 150px;"></div>
+            <div>
+              <span class="btn btn-primary btn-file"><span class="fileinput-new" id="load-image">Select image</span><span class="fileinput-exists">Change</span><%= f.file_field :pw_one %></span>
+              <a href="#" class="btn btn-danger fileinput-exists" data-dismiss="fileinput">Remove</a>
+            </div>
+          </div></center>
+      </div>
+
+      <div class="col-md-3">
+          <center><div class="fileinput fileinput-new" data-provides="fileinput">
+            <div class="fileinput-preview thumbnail" data-trigger="fileinput" style="width: 200px; height: 150px;"></div>
+            <div>
+              <span class="btn btn-primary btn-file"><span class="fileinput-new" id="load-image">Select image</span><span class="fileinput-exists">Change</span><%= f.file_field :pw_two %></span>
+              <a href="#" class="btn btn-danger fileinput-exists" data-dismiss="fileinput">Remove</a>
+            </div>
+          </div></center>
+      </div>
+
+      <div class="col-md-3">
+          <center><div class="fileinput fileinput-new" data-provides="fileinput">
+            <div class="fileinput-preview thumbnail" data-trigger="fileinput" style="width: 200px; height: 150px;"></div>
+            <div>
+              <span class="btn btn-primary btn-file"><span class="fileinput-new" id="load-image">Select image</span><span class="fileinput-exists">Change</span><%= f.file_field :pw_three %></span>
+              <a href="#" class="btn btn-danger fileinput-exists" data-dismiss="fileinput">Remove</a>
+            </div>
+          </div></center>
+      </div>
+
+       <div class="col-md-3">
+          <center><div class="fileinput fileinput-new" data-provides="fileinput">
+            <div class="fileinput-preview thumbnail" data-trigger="fileinput" style="width: 200px; height: 150px;"></div>
+            <div>
+              <span class="btn btn-primary btn-file"><span class="fileinput-new" id="load-image">Select image</span><span class="fileinput-exists">Change</span><%= f.file_field :pw_four %></span>
+              <a href="#" class="btn btn-danger fileinput-exists" data-dismiss="fileinput">Remove</a>
+            </div>
+          </div></center>
+      </div>
+    </div>
+    </div>
+
+    <div class="form-group">
+        <%= f.submit("Upload", class: 'btn btn-lg btn-success client-signin-btn') %>
+      </div>
+</div>
+<% end %>

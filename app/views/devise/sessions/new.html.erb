@@ -1,0 +1,28 @@
+<div class="login-container">
+    <div class="panel panel-default worker-client-panel">
+    		<%= image_tag 'logo_serbisyou.png', class: 'login-img img-responsive' %>
+    		<%= simple_form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
+              <div class="form-group">
+                    <label class="client-login-label">Username</label>
+                    <%= f.input :email, required: false, :input_html => { class: 'form-control client-login-field' }, label: false,autofocus: true %>
+              </div>
+               <div class="form-group">
+                    <label class="client-login-label">Password</label>
+                      <%= f.input :password, :input_html => { class: 'form-control client-login-field' }, label: false, required: false %>
+              </div>
+
+              <div class="form-group">
+                    <%= f.input :remember_me, as: :boolean if devise_mapping.rememberable? %>
+              </div>
+	          <%- if devise_mapping.recoverable? && controller_name != 'passwords' && controller_name != 'registrations' %>
+	          <div class="form-group">
+					  <%= link_to "Forgot your password?", new_password_path(resource_name) %><br />
+              </div>
+              <% end -%>
+              <div class="form-group">
+              	<%= f.button :submit, "Log in", class: 'btn btn-lg btn-success client-signin-btn' %> 
+              </div>
+        	<% end %>
+
+    </div>
+  </div>

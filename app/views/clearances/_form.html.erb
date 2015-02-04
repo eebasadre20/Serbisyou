@@ -1,0 +1,23 @@
+<%#= form_for @clearance do |f| %>
+  <%# if @clearance.errors.any? %>
+    <div id="error_explanation">
+      <h2><%#= pluralize(@clearance.errors.count, "error") %> prohibited this painting from being saved:</h2>
+      <ul>
+      <%# @clearance.errors.full_messages.each do |msg| %>
+        <li><%#= msg %></li>
+      <%# end %>
+      </ul>
+    </div>
+  <%# end %>
+
+  <div class="field">
+    <%#= f.label :name %><br />
+    <%#= f.text_field :name %>
+  </div>
+  <p>
+    <%#= f.file_field :avatar %>
+  </p>
+  <div class="actions">
+    <%#= f.submit %>
+  </div>
+<%# end %>

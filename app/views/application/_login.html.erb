@@ -1,0 +1,13 @@
+<%= form_tag(:action => 'login_attempt') do %>
+	      <div class="form-group">
+	        <label class="client-login-label">Username</label>
+	        <%= text_field_tag(:username_or_email,nil, class: 'form-control client-login-field', required: true, placeholder: 'Username or Email') %>
+	      </div>
+	       <div class="form-group">
+	        <label class="client-login-label">Password</label>
+	        <%= password_field_tag(:login_password,nil, class: 'form-control client-login-field', required: true, placeholder: 'Password') %>
+	      </div>
+	      <div class="form-group">
+	      	<%= submit_tag("Log In", class: 'btn btn-lg btn-success client-signin-btn') %>
+	      </div>
+<% end %>

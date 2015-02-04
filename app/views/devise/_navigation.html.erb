@@ -1,0 +1,34 @@
+<nav class="navbar-default navbar-fixed-top" role="navigation">
+  <div class="container-fluid">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+        <span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a class="navbar-brand" href=""><%= image_tag 'logo_serbisyou.png', class: 'nav-logo' %></a>
+    </div>
+
+    <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+        <ul class="nav navbar-nav">
+          <li><a class="nav-link" href="">Home</a></li>
+                  <li><a class="nav-link" href="">FAQs</a></li>
+                  <li><a class="nav-link" href="">About Us</a></li>
+                  <li><a class="nav-link" href="contact_us.html">Contact Us</a></li>
+        </ul>
+        
+        <form class="navbar-form navbar-right" >
+          <% if client_signed_in? %>
+            <a href="" class="nav-login">Welcome, <%= current_client.email %>!</a>
+            <%= link_to "Edit profile", edit_client_registration_path, class: 'nav-signup' %> |
+  			<%= link_to "Logout", destroy_client_session_path, class: 'nav-signup' , method: :delete %>
+          <% else %> 
+            <%= link_to "Sign up", new_client_registration_path, class: 'nav-signup' %> 
+  			<%= link_to "Login", new_client_session_path, class: "nav-login" %>
+          <% end %>
+        </form>
+      </div>
+
+  </div>
+</nav>

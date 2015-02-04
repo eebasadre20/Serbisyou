@@ -1,0 +1,2 @@
+class BrgyAvatarsController < ApplicationController
+end

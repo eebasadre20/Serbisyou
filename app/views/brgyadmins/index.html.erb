@@ -1,0 +1,124 @@
+<section class="container">
+    <div class="row search-field" >
+    </div>
+    <section ng-controller="IndexCtrl">
+    <div class="row prof-header">
+    <h2 class="profile-header">Your Account</h2>
+    </div>
+    <% flash.each do |key, value| %>
+      <div class="alert alert-success" role="alert"><%= value %></div>
+    <% end %>
+    <div class="row brgy-profile col-lg-offset-1 col-md-offset-1 col-sm-offset-1 col-xs-offset-1">
+      <div class="col-lg-3 col-md-3 col-sm-3 col-xs-5">
+        <ul class="nav nav-pills nav-stacked">
+            <li role="presentation"><a href="#">Inbox</a></li>
+            <div class="divider"></div>
+            <li role="presentation"><a href="#">Account</a></li>
+            <div class="divider"></div>
+            <li role="presentation"><%= link_to 'Edit Account', edit_brgyadmin_path(@admin) %></li>
+            <div class="divider"></div>
+            <li role="presentation"><a href="#"></a></li>
+            <div class="divider"></div>
+        </ul>
+    </div>
+
+    <div class="col-lg-3 col-md-3 col-sm-3 col-xs-7" id="avatar">
+      <%= image_tag @admin.avatar_url(:thumb).to_s, class: "img-circle profile-img img-responsive" %>
+    </div>
+    <div class="col-lg-5 col-md-3 col-sm-5 col-xs-12">
+          <h2>Personal Information</h2>
+           <p><span class="glyphicon glyphicon-user" aria-hidden="true"></span><%= @admin.firstname %> <%= @admin.lastname %></p>
+           <p><span class="glyphicon glyphicon-envelope" aria-hidden="true"></span> <%= @admin.email %></p>
+           <p><span class="glyphicon glyphicon-earphone" aria-hidden="true"></span> <%= @admin.contact_number %></p>
+           <p><span class="glyphicon glyphicon-home" aria-hidden="true"></span> <%= @admin.brgy_position %></p>
+           <p><span class="glyphicon glyphicon-home" aria-hidden="true"></span> <%= @admin.barangay %></p>
+           <button type="button" class="btn btn-success btn-sm">
+              <span class="glyphicon glyphicon-plus" aria-hidden="true"></span> <%= link_to 'Add Service Provider', new_serviceprovider_brgyadmins_path, method: :get%>
+           </button> 
+    </div>
+    </div>
+
+    <section class="section-container">
+    <div class="divider"></div>
+      <div class="row">
+        <div class="row">
+          <h2 class="profile-header"><%= @admin.barangay %> Workers</h2>
+        </div>
+        <div class="row transaction col-lg-offset-1 col-md-offset-1 col-sm-offset-1 col-xs-offset-1" ng-repeat="sp in serviceproviders">
+            <div class="col-lg-3  col-md-3 col-sm-5 col-xs-10">
+              <div class="thumbnail">
+               <img src="http://placekitten.com/g/200/300" alt="">
+                <div class="caption">
+                  <h3>{{ sp.firstname }} {{ sp.lastname }}</h3>
+                  <p><a href="#" class="btn btn-success" role="button" data-toggle="modal" data-target="#myModal" ng-click="getServiceProvider( sp )">More Details</a></p>
+                </div>
+              </div>
+            </div>
+
+      </div>                  
+    </div>
+    </section>
+
+
+    <!-- Modal -->
+    <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+            <h3 class="modal-title" id="myModalLabel">Personal Information</h3>
+          </div>
+          <div class="modal-body">
+            <h5> Personal Information </h5>
+            <br>
+            <div class="thumbnail">
+              <img src="http://placekitten.com/g/150/200" alt="">
+            </div>
+            <div>
+              <label for=""> Name  <p>{{ sp.serviceprovider.firstname}} {{ sp.serviceprovider.lastname }}</p></label>
+            </div>
+            <div>
+              <label for=""> Birthdate  <p>{{ sp.serviceprovider.firstname}} {{ sp.serviceprovider.lastname }}</p></label>
+            </div>
+            <div>
+              <label for=""> Gender  <p>{{ sp.serviceprovider.gender }}</p></label>
+            </div>
+            <div>
+              <label for=""> Gender  <p>{{ sp.serviceprovider.gender }}</p></label>
+            </div>
+            <div>
+              <label for=""> Civil Status  <p>{{ sp.serviceprovider.civil_status }}</p></label>
+            </div>
+            <div>
+              <label for=""> Barangay  <p>{{ sp.serviceprovider.barangay }}</p></label>
+            </div>
+            <div>
+              <label for=""> Address  <p>{{ sp.vbrgy_address }}</p></label>
+            </div>
+            <div>
+              <label for=""> Contact Number  <p>{{ sp.serviceprovider.contact_number }}</p></label>
+            </div>
+             <div>
+              <label for="">Skills</p></label>
+            </div>
+            <div>
+              <label for=""> Service <p>{{ sp.service.service }}</p></label>
+            </div>
+            <div>
+              <label for=""> Skill set</label>
+              <ul>
+                <li ng-repeat="skill in sp.skills">
+                  {{ skill.name }}
+                </li>
+              </ul>
+            </div>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+            <button type="button" class="btn btn-primary">Save changes</button>
+          </div>
+        </div>
+      </div>
+    </div>
+    </section>
+</section>

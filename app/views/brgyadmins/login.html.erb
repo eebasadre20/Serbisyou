@@ -1,0 +1,14 @@
+
+<div class="login-container">
+	<% if flash[:error] %>
+		<div class="alert alert-error" role="alert">
+			<%= flash[:error] %>
+		</div>
+	<% end %>
+	<h2>Barangay Admin</h2>
+	<div class="panel panel-default worker-client-panel">
+		  <%= image_tag('logo_serbisyou.png', class: 'login-img img-responsive') %>
+	      <%= render 'login' %>
+	</div>
+</div>
+

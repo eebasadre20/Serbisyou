@@ -1,0 +1,5 @@
+<% if @brgy_avatar.new_record? %>
+	alert("Failed to upload clearance: <%= j @brgy_avatar.errors.full_messages.join(', ').html_safe %>");
+<% else %>
+	$('#brgy-avatar').append('<%= j render(@brgy_avatar) %>');
+<% end %>

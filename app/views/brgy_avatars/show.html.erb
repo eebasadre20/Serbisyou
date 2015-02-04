@@ -1,0 +1,9 @@
+<h1><%= @brgy_avatar.name %></h1>
+
+<p><%= image_tag @brgy_avatar.avatar_url %></p>
+
+<p>
+  <%= link_to "Edit", edit_clearance_path(@brgy_avatar) %> |
+  <%= link_to "Destroy",@brgy_avatar, :confirm => 'Are you sure?', :method => :delete %> |
+  <%= link_to "Back to Paintings", clearance_path %>
+</p>

@@ -1,0 +1,8 @@
+<div class="brgy-avatar">
+  <%= link_to image_tag(brgy_avatar.avatar_url(:thumb)), brgy_avatar if brgy_avatar.avatar? %>
+  <div class="name"><%= brgy_avatar.name %></div>
+  <div class="actions">
+    <%= link_to "edit", edit_brgy_avatar_path(brgy_avatar) %> |
+    <%= link_to "remove", brgy_avatar, :confirm => 'Are you sure?', :method => :delete %>
+  </div>
+</div>

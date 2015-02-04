@@ -1,0 +1,44 @@
+<div class="container" ng-controller="listServiceCtrl">
+    <section class="row home-search-field home-search-field-home">
+      <div class="col-lg-6 col-md-6 col-sm-6 col-lg-offset-3 col-md-offset-3 col-sm-offset-3">
+        <input type="text" class="form-control home-search-field" aria-label="..." placeholder="Searching for something ?">
+      </div>
+    </section>
+    <div class="container content">
+      <div class="row">
+        <div class="col-md-3">
+          <ul class="list-group">
+          <li ng-repeat="barangay in barangays" ng-click="filterByBarangay(barangay.id);setBrgy(barangay.id)" class="list-group-item {{setSelected(barangay.id)}}">
+            <span class="badge"> {{ getNumberOfServiceProvider( barangay.id ) }} </span>
+            {{barangay.barangay}}
+          </li>
+        </ul>
+
+          <ul class="list-group">
+          <li ng-repeat="category in categories" ng-click="filterByCategory(category.id);setCtgry(category.id)" class="list-group-item {{setSelectedCategory(category.id)}}">
+            <span class="badge"> {{ getNumberOfServiceProviderInCategory( category.id ) }} </span>
+            {{category.name}}
+          </li>
+        </ul>
+        </div>
+
+        <div class="col-md-9">
+          <h4>Workers</h4>
+          <div class="row">
+            <div class="col-sm-6 col-md-4" ng-repeat="sp in workerinservice">
+              <div class="thumbnail">
+                <img ng-src="{{ sp.avatar.thumb.url }}">
+                <div class="caption">
+                  <h3>{{ sp.firstname }} {{ sp.lastname }}</h3>
+                  <p>Birthdate: <b>{{sp.birthdate | date : format : timezone}}</b></p>
+                  <p>Address: <b>{{sp.brgy_address}}</b></p>
+                  <p><a href="/users/{{sesssion_user.id}}/serviceproviders/{{sp.id}}" method="GET">View Details</a></p>
+                  <p><%#= link_to 'View details', user_serviceprovider_path(session[:user_id], session[:service_id]), method: :get %></p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+</div>

@@ -1,0 +1,123 @@
+body {
+	font-family: "Trebuchet MS", Helvetica, sans-serif;
+	font-size: 12px;
+}
+section#banner {
+	background-image: url(../assets/banner-bg.jpeg); 
+	background-repeat: no-repeat;
+	background-size: cover;
+	margin-top: -50px;
+	padding-top: 10px;
+	padding-bottom: 100px;
+}
+#header-logo {
+	width: 120px;
+	height: 20px;
+}
+.header-title {
+	font-size: 10em;
+	font-weight: bolder;
+	color: #f0ad4e;
+	text-shadow:1px 1px 4px #000000;
+}
+.header-description {
+	font-size: 2em;
+	color: #ffffff;
+	text-shadow:1px 1px 3px #000000;
+}
+.header-desc-second {
+	font-size: 2.5em;
+	font-weight: bolder;
+	color: #ffffff;
+	text-shadow:1px 1px 3px #000000;
+}
+.header-btn-customer {
+	background-color: #f0ad4e;
+	border: none;
+	border-radius: 5px;
+	box-shadow: 0px 0px 1px #000000;
+	text-shadow:0px 1px 1px #000000;
+	color: #ffffff;
+	font-size: 2em;
+	width: 300px;
+	height: 60px;
+}
+.header-btn-customer:hover {
+	background-color: #EC951B;
+}
+.header-btn-provider {
+	background-color: rgba(255, 255, 255, 0);
+	border: 3px solid #f0ad4e;
+	border-radius: 5px;
+	box-shadow: 0px 0px 1px #000000;
+	text-shadow:0px 1px 1px #000000;
+	color: #ffffff;
+	font-size: 2em;
+	width: 300px;
+	height: 60px;
+}
+.header-btn-provider:hover {
+	background-color: #f0ad4e;
+}
+.submenu {
+	background-color: #F2F2F2;
+	padding-top: 10px;
+	padding-bottom: 10px;
+	margin-bottom: -10px;
+}
+.submenu_item {
+	padding-left: 21px;
+	padding-right: 21px;
+	margin: 0 auto;
+	font-size: 1.02em;
+	color:#000000;
+}
+.submenu_item:hover {
+	text-decoration: none;
+	color: #FFB64C;
+}
+section#body {
+	padding-top: 70px;
+	padding-bottom: 70px;
+}
+.panel-icon {
+	margin: 0 auto;
+	text-align: center;
+	color: #f0ad4e;
+	font-size: 5em;
+}
+.panel-content {
+	margin: 0 auto;
+	text-align: center;
+	font-size: 1.3em;
+	font-weight: bold;
+}
+.view-body {
+	height: 320px;
+	overflow: hidden;
+	margin-bottom: 30px;
+}
+.view-content {
+	height: 320px;
+	border: 1px solid #ddd;
+	color: #777;
+}
+.view-details {
+	height: 320px;
+}
+.view-link {
+	height: 50px;
+	padding: 10px;
+	margin-top: -50px;
+	background-color: #f0ad4e;
+	font-size: 20px;
+	color: white;
+	text-align: center;
+	display: none;
+}
+.view-link-to:hover {
+	text-decoration: none;
+}
+section#header{
+	padding: 50px;
+}

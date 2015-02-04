@@ -1,0 +1,15 @@
+<h1>Login In</h1>
+
+<%= form_tag authsessions_path do %>
+	      <div class="form-group">
+	        <label class="client-login-label">Username</label>
+	        <%= text_field_tag(:email, params[:email], class: 'form-control client-login-field', required: true, placeholder: 'Username or Email') %>
+	      </div>
+	       <div class="form-group">
+	        <label class="client-login-label">Password</label>
+	        <%= password_field_tag(:password,nil, class: 'form-control client-login-field', required: true, placeholder: 'Password') %>
+	      </div>
+	      <div class="form-group">
+	      	<%= submit_tag("Log In", class: 'btn btn-lg btn-success client-signin-btn') %>
+	      </div>
+<% end %>

@@ -1,0 +1,14 @@
+<div class="login-container">
+    <div class="panel panel-default worker-client-panel">
+
+      <% if @admin.errors.any? %>
+        <ul class="Signup_Errors">
+        <% for message_error in @admin.errors.full_messages %>
+          <li>* <%= message_error %></li>
+        <% end %>
+        </ul>
+      <% end %>
+
+      <%= render 'form' %> 
+    </div>
+  </div>
